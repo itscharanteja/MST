@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html ng-app="studentApp">
+  <head>
+    <title>Student Record App</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        margin-bottom: 20px;
+      }
+
+      label {
+        font-weight: bold;
+      }
+
+      input[type="text"],
+      input[type="number"] {
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        width: 50%;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      button {
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        width: 50%;
+        background-color: #4caf50;
+        color: white;
+        cursor: pointer;
+      }
+
+      th,
+      td {
+        padding: 10px;
+        border: 1px solid #ccc;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body ng-controller="StudentController">
+    <h1>Student Records</h1>
+
+    <form ng-submit="addStudent()">
+      Name: <input type="text" ng-model="newStudent.name" required /> <br />
+      Age: <input type="number" ng-model="newStudent.age" required min="18" />
+      <br />
+      <button type="submit">Add Student</button>
+    </form>
+
+    <br />
+
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="student in students">
+          <td>{{student.name}}</td>
+          <td>{{student.age}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <script>
+      var app = angular.module("studentApp", []);
+
+      app.controller("StudentController", function ($scope) {
+        $scope.students = []; // Array to store student data
+        $scope.newStudent = {}; // Object to hold new student information
+
+        $scope.addStudent = function () {
+          if (!$scope.newStudent.name || !$scope.newStudent.age) {
+            return; // Prevent adding empty students
+          }
+          $scope.students.push($scope.newStudent); // Add new student to array
+          $scope.newStudent = {}; // Reset the new student object for next entry
+        };
+      });
+    </script>
+  </body>
+</html>

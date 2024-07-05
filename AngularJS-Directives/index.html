@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <title>AngularJS Directives & Events</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+      .bold {
+        font-weight: bold;
+      }
+      div {
+        width: 100px;
+        height: 100px;
+        text-align: center;
+        line-height: 100px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body ng-controller="MyController">
+    <h1>Click the box to change color!</h1>
+    <div ng-click="changeColor()" ng-style="{'background-color': boxColor}">
+      Click Me!
+    </div>
+
+    <br />
+
+    <h1>Highlight on Mouseover!</h1>
+    <p ng-mouseover="makeBold()" ng-class="{'bold': isBold}">
+      This text will become bold on mouseover.
+    </p>
+    <script>
+      var app = angular.module("myApp", []);
+
+      app.controller("MyController", function ($scope) {
+        $scope.boxColor = "lightblue"; // Initial box color
+        $scope.isBold = false; // Initial bold flag
+
+        $scope.changeColor = function () {
+          $scope.boxColor =
+            $scope.boxColor === "lightblue" ? "red" : "lightblue";
+        };
+
+        $scope.makeBold = function () {
+          $scope.isBold = true; // Flag to control text formatting
+        };
+      });
+    </script>
+  </body>
+</html>

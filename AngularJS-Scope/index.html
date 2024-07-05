@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <title>AngularJS Scope Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  </head>
+  <body ng-controller="ParentController">
+    <h1>Parent message :{{parentMsg}}</h1>
+    <button ng-click="change()">Change Parent Message</button>
+
+    <div ng-controller="ChildController">
+      <h2>Child message: {{childMsg}}</h2>
+      <button ng-click="change()">Change Child Message</button>
+    </div>
+
+    <script>
+      var app = angular.module("myApp", []);
+      app.controller("ParentController", function ($scope) {
+        $scope.parentMsg = "Hello Parent Message";
+        $scope.change = function () {
+          $scope.parentMsg = "Parent Message Changed";
+        };
+      });
+
+      app.controller("ChildController", function ($scope) {
+        $scope.childMsg = "Hello Child Message";
+        $scope.change = function () {
+          $scope.childMsg = "Child Message Changed";
+        };
+      });
+    </script>
+  </body>
+</html>
