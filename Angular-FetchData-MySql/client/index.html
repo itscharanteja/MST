@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <title>My App</title>
+    <script src="lib/angular.min.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/services/dataService.js"></script>
+    <script src="app/controllers/mainController.js"></script>
+  </head>
+  <body ng-controller="MainController">
+    <h1>Data from MySQL</h1>
+    <ul>
+      <li ng-repeat="item in data">{{ item }}</li>
+    </ul>
+  </body>
+</html>

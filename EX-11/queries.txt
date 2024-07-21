@@ -1,0 +1,44 @@
+// Switch to the desired database. If it doesn't exist, it will be created when data is inserted.
+use example_db;
+
+// Create a new collection named 'example_collection'. Collections are often created implicitly when documents are inserted.
+db.createCollection("example_collection");
+
+// Insert multiple documents into the 'example_collection'. 
+// Each document is a JavaScript object with fields and values.
+db.example_collection.insertMany([
+    { name: "Example Name 1", value: "Example Value 1" },
+    { name: "Example Name 2", value: "Example Value 2" },
+    { name: "Example Name 3", value: "Example Value 3" }
+]);
+
+// Find all documents in the 'example_collection'.
+
+db.example_collection.find().toArray()
+
+// Find a single document matching a specific query.
+// In this case, we find the document where the name is "Example Name 1".
+print("Find One Document:");
+printjson(db.example_collection.findOne({ name: "Example Name 1" }));
+
+// Sort documents by the 'name' field in ascending order (1 for ASC, -1 for DESC).
+// `toArray()` converts the cursor to an array for easier viewing.
+
+db.example_collection.find().sort({ name: 1 }).toArray();
+
+// Limit the number of documents returned by the query to 2.
+print("Limited Documents (2):");
+db.example_collection.find().limit(2).toArray();
+
+// Skip the first document and return the rest.
+// This is useful for pagination.
+db.example_collection.find().skip(1).toArray();
+
+// Get distinct values for the 'name' field across all documents.
+db.example_collection.distinct("name");
+
+// Projection: Include only the 'name' field and exclude the '_id' field in the result.
+db.example_collection.find({}, { name: 1, _id: 0 }).toArray();
+
+// Projection: Exclude the 'value' field from the result.
+db.example_collection.find({}, { value: 0 }).toArray();
